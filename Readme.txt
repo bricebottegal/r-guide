@@ -1,0 +1,3 @@
+The goal of this guide is to help you to bootstrap your knowledge in statistics and R programming language whatever your current level is. It has been created thanks to a French MOOC called “Introduction to statistics using R” created by Professor Bruno Fallisard from Paris-Sud university and Christophe Lalanne from Paris-Diderot university. It has been developed using RMarkdown and source code is available on GitHub so please don’t hesitate to enhance it! The dataset is the top 250 movies ranked on IMDb site, you have to download it to follow this guide.
+
+Happy analysis!
