@@ -35,7 +35,7 @@ By <a href="https://twitter.com/bricebottegal">Brice Bottégal</a>
 
 ### About this guide
 
-The goal of this guide is to help you to bootstrap your knowledge in statistics and R programming language whatever your current level is. It has been created thanks to a French MOOC called <a href="https://www.fun-mooc.fr/">"Introduction to statistics using R"</a> created by Professor Bruno Fallisard from Paris-Sud university and Christophe Lalanne from Paris-Diderot university. It has been developed using RMarkdown and source code is available on <a href="#">GitHub</a> so please don't hesitate to enhance it! The [dataset](#dataset) is the top 250 movies ranked on <a href="http://www.imdb.com/">IMDb site</a>, you have to <a href="http://www.mobile-marketing.fr/r-guide/movie.csv">download it</a> to follow this guide. 
+The goal of this guide is to help you to bootstrap your knowledge in statistics and R programming language whatever your current level is. It has been created thanks to a French MOOC called <a href="https://www.fun-mooc.fr/">"Introduction to statistics using R"</a> created by Professor Bruno Fallisard from Paris-Sud university and Christophe Lalanne from Paris-Diderot university. It has been developed using RMarkdown and source code is available on <a href="https://github.com/bricebottegal/r-guide">GitHub</a> so please don't hesitate to enhance it! The [dataset](#dataset) is the top 250 movies ranked on <a href="http://www.imdb.com/">IMDb site</a>, you have to <a href="http://www.mobile-marketing.fr/r-guide/movie.csv">download it</a> to follow this guide. 
 
 Happy analysis!
 
@@ -215,7 +215,7 @@ Use "/" or "\\\\" as separator in the path file depending of your operating syst
 You have to espace the antislash because "\\" is a R special character.
 
 ```{r, results="hide"}
-movie <- read.csv2("C:/Users/Brice/Desktop/FUN/Semaine 1/final2.csv")
+movie <- read.csv2("http://www.mobile-marketing.fr/r-guide/movie.csv")
 ```
 
 movie will be the R object that we will manipulate during the guide. It's basically a two dimmensionnal array with rows and columns.
@@ -224,7 +224,7 @@ A row can also be named a data point / observation and a column can also be name
 
 You can also just specified the name of the file:
 
-```{r, results="hide"}
+```
 movie <- read.csv2("final2.csv")
 ```
 
@@ -238,7 +238,7 @@ getwd()
 
 And to modify it:
 
-```{r, results="hide"}
+```
 setwd("C:/Users/Brice/Documents")
 ```
 
@@ -246,7 +246,7 @@ setwd("C:/Users/Brice/Documents")
 
 #### To a CSV file
 
-```{r, results="hide"}
+```{r, eval=c(1)}
 write.csv(movie, file="mydata.csv", row.names = FALSE)
 ```
 
