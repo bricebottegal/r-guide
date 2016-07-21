@@ -1,0 +1,1228 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r set-options, echo=FALSE, cache=FALSE}
+knitr::opts_chunk$set(width=1200)
+```
+
+* * * * *
+## Introduction to R programming language and statistics
+July 19, 2016<br/>
+By <a href="https://twitter.com/bricebottegal">Brice Bottégal</a>
+
+
+* * * * *
+## Summary
+* * * * *
+
+### [Introduction](#introduction)
+### [Back to basics](#backToBasics)
+### [What is a data set? Create / save / load / describe a data set](#dataset)
+### [What is a package? How can I find / use a package?](#package)
+### [Discover the data](#discoverData)
+### [Visualize the data](#dataVisualization)
+### [Prepare the data](#dataPreparation)
+### [Analyze and understand the data thanks to statistics](#stats)
+
+* * * * *
+## <a name="introduction"></a>Introduction
+* * * * *
+
+### About this guide
+
+The goal of this guide is to help you to bootstrap your knowledge in statistics and R programming language whatever your current level is. It has been created thanks to a French MOOC called <a href="https://www.fun-mooc.fr/">"Introduction to statistics using R"</a> created by Professor Bruno Fallisard from Paris-Sud university and Christophe Lalanne from Paris-Diderot university. It has been developed using RMarkdown and source code is available on <a href="#">GitHub</a> so please don't hesitate to enhance it! The [dataset](#dataset) is the top 250 movies ranked on <a href="http://www.imdb.com/">IMDb site</a>, you have to <a href="http://www.mobile-marketing.fr/r-guide/movie.csv">download it</a> to follow this guide. 
+
+Happy analysis!
+
+### Why should I learn R?
+
+R is for you if you want to easily manipulate and present your data in compelling ways!
+
+Example:
+
+```{r, results="hide", echo=FALSE}
+movie <- read.csv2("C:/Users/Brice/Desktop/FUN/Semaine 1/final2.csv")
+```
+
+```{r, results="hide", echo=FALSE}
+pie(table(movie$Theme))
+```
+
+And if you want to be able to do prediction thanks to the data that you have collected!
+
+R is today one of the most widely used language for data science (source: <a href="http://www.tiobe.com/tiobe_index?page=index">TIOBE</a>).
+
+### What have I to install?
+
+What? R! Of course. And R Studio, which is one of the most famous IDE for R. IDE (the first word to remember!) is the acronym of <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">Integrated Development Environment</a>. Very roughly, it's a software to build code faster than using notepad for example. IDE often integrates syntax colorization, build automation tools, compiler... It's essential! R studio integrates everything you need: <a href="https://www.rstudio.com/products/RStudio/">download R studio</a>. There is a video that presents R studio that you should see on the download page.
+
+### About the author
+
+The author is Brice Bottegal, data enthusiast product manager in the digital marketing field (<a href="https://twitter.com/bricebottegal">@bricebottegal</a> ; <a href="https://fr.linkedin.com/in/bricebottegal">linkedIn</a>)
+
+* * * * *
+## <a name="backToBasics"></a>Back to basics
+* * * * *
+
+### Introduction
+
+This part is for the beginners, if you are already familiar with R, move on ;)
+
+### How to display something?
+
+If you know already a programmation language, this will be the most simple "Hello world" that you have ever seen!
+
+For the others (shame on you ;) when you present a language in computer science, the "Hellow world" message is a <a href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">ritual</a>.
+
+```{r}
+"Hello world!"
+```
+
+### What is a variable?
+
+Whatever the programming language is, you need to store various information to use them in your program.
+
+Variables are reserved memory locations to store values.
+
+When you create a variable, you reserve some space in memory with the value of the variable and its name to easily use it after.
+
+A variable has a default type depending of its values (numeric, array etc.).
+
+### Create the variable yippeekiyay
+
+```{r}
+yippeekiyay = "my first variable"
+```
+
+You can also use "<-" in place of "=".
+
+### Dislay the variable value
+
+```{r}
+yippeekiyay
+```
+
+### We will use our first function now!
+A function is a portion of code that has been developed by the creators of R language, for free and just for you! Functions allow you to develop easier and faster your program. There are functions for most common operations (and for dark and rare operations too!). Every function is documented, you can find the most common <a href="https://cran.r-project.org/doc/contrib/Short-refcard.pdf">here</a>. The name of the function that we will use is cat(). cat() function will allow you to display the variable value without double quote and without going to a new line.
+
+```{r}
+cat(yippeekiyay)
+```
+
+### You need help to know how to use a function? R help is always here!
+
+```{r,eval=c(1)}
+help(cat)
+```
+
+### Dislay the variable value with some text
+If you want to shine in society, remember that "," is called the R concatenate character.
+
+```{r}
+cat("Yeah! I created",yippeekiyay)
+```
+
+### How can I create a text with a double quote?
+By "escaping" (another word to remember) the double quote with the "\\" (backslash) character, it allows R to not interpret the "\\" as a special char
+
+```{r}
+cat("I would like to put \"that\" between double quote!")
+```
+
+### Do several actions automatically
+A program is composed mainly of that kind of instructions :)
+
+- i is called the counter
+- 1:3 is the number of times that you want to repeat what it's inside the loop (yes, again, remember that!)
+
+```{r}
+for (i in 1:3) {
+  cat("Goal ! ")
+}
+```
+
+### Display a variable value inside the loop
+
+```{r}
+for (i in 1:3) {
+  cat(i,"Goal ! ")
+}
+```
+
+### Do different action(s) depending of a condition 
+
+```{r}
+if (yippeekiyay == "my first variable") {
+  cat("Ok it's true, I admit")
+} else {
+  cat("No, you're joking, I already created thousands of variables")
+}
+```
+
+### Now, you're ready to write your 1st program!
+#### Put an "s" to "Goal" depending of the number of it
+
+```{r}
+for (i in 1:3) {
+  if (i <= 1) {
+    cat(i, "Goal! ")
+  } else {
+    cat(i, "Goals! ")
+  }
+}
+```
+
+* * * * *
+## <a name="dataset"></a>What is a data set ? Create / save / load / describe a data set
+* * * * *
+
+A data set is a collection of data. The data set can be contained in a file, a database etc.
+
+Every column of the data set is called a variable and each row contains a particular value of each variable.
+
+## Create / save / load / describe a data set
+
+### Create a data set
+
+#### Define variable(s) and value(s)
+
+```{r}
+height=c(185,178,165,171,172)
+weight=c(82,81,55,65,68)
+IQ=c(110,108,125,99,124)
+sex=c("M","M","F","F","F")
+```
+
+#### Create the data set with the variables defined
+
+```{r}
+results <- data.frame(height,weight,IQ,sex)
+```
+
+### Load a data set
+
+#### From a CSV file
+
+Use read.csv2() function if separator is ";" and decimal is "," or read.csv() function if separator is "," and decimal is ".".
+
+Use "/" or "\\\\" as separator in the path file depending of your operating system (use "/" for Windows and "\\\\" for MacOS and Linux).
+
+You have to espace the antislash because "\\" is a R special character.
+
+```{r, results="hide"}
+movie <- read.csv2("C:/Users/Brice/Desktop/FUN/Semaine 1/final2.csv")
+```
+
+movie will be the R object that we will manipulate during the guide. It's basically a two dimmensionnal array with rows and columns.
+
+A row can also be named a data point / observation and a column can also be named a variable, a feature or an attribute.
+
+You can also just specified the name of the file:
+
+```{r, results="hide"}
+movie <- read.csv2("final2.csv")
+```
+
+R will look for the file inside your working directory.
+
+Here is the function to know your working directory:
+
+```{r, results="hide"}
+getwd()
+```
+
+And to modify it:
+
+```{r, results="hide"}
+setwd("C:/Users/Brice/Documents")
+```
+
+### Save a data set
+
+#### To a CSV file
+
+```{r, results="hide"}
+write.csv(movie, file="mydata.csv", row.names = FALSE)
+```
+
+### Describe a data set 
+
+- Describe a data set with summary() function: it gives advanced information on each variable
+
+```{r}
+summary(movie)
+```
+
+- Describe a data set with str() function: it gives global information and first variables values
+
+```{r}
+str(movie)
+```
+
+- Describe a data set with specific column(s) (e.g.: minimum, median, mean, standard derivation, empty values...)
+
+prettyR package is required
+
+```{r, eval=c(1)}
+library(prettyR)
+```
+
+```{r, results="hide"}
+describe(movie, num.desc = c("min", "median", "mean", "sd", "max", "valid.n"))
+```
+
+* * * * *
+## <a name="package"></a>What is a package? How can I find / use a package?
+* * * * *
+
+A package is a collection of R functions. You can use one or several packages and packages are stored in your library. Packages are very useful to add to R new functions to help you create your program. Most of R users use package but you can also create your own R package and share it with the community! Package is one of the strength of R programming language. Here is the <a href="http://www.rdocumentation.org/">R package search engine</a>.
+
+## Load a package
+
+```{r, eval=c(1)}
+library(prettyR)
+```
+
+* * * * *
+## <a name="discoverData"></a>Discover the data
+* * * * *
+
+### Introduction
+
+This part will allow you to discover your data set: its variable(s), its value(s), by row(s), by column(s), by filtering...
+
+### Discover values of one variable
+
+You have two ways to display all the values of a specific variable (number of votes for example):
+
+- By using variable ID ("1")
+
+    ```{r}
+    movie[,1]
+    ```
+
+- By using variable name ("Votes")
+
+    ```{r}
+    movie$Votes
+    ```
+
+In this syntax: "movie[,1]", the number at the left of the comma defines the row(s) and the number at the right, the column(s) to display. 
+
+If one of them is empty like in our example, R will display all the rows or all the columns (I let you try to let both empty!).
+
+#### <br/>Calculate mean, min, max etc. of a variable (na.rm = TRUE is mandatory to ignore empty values)
+
+##### <br/>Display the mean of votes
+```{r}
+mean(movie$Votes, na.rm = TRUE)
+```
+
+You can replace "mean" by "min", "max" etc.
+
+#### <br/>Display the intersection of a specific row and variable: number of votes of top 1 movie
+
+- Using ID
+
+    ```{r}
+    movie[1,1]
+    ```
+
+- Using name
+
+    ```{r}
+    movie$Votes[1]
+    ```
+
+#### <br/>Display a range of specific rows of a specific variable: top 10 movies titles 
+
+- Using ID
+
+    ```{r}
+    movie[1:10,3]
+    ```
+
+- Using name
+
+    ```{r}
+    movie$Title[1:10]
+    ```
+
+#### <br/>Display specific rows of a specific variable: top 32 and 33 movies titles
+
+- Using ID
+
+    ```{r}
+    movie[c(32,33), 3]
+    ```
+
+- Using name
+
+    ```{r}
+    movie$Title[c(32,33)]
+    ```
+  
+If you want to use a list of element, you will have to use this syntax: 
+
+```
+c(element1,element2,elementX,...)
+```
+
+### Discover values of several variable(s)
+
+#### <br/>Display all the variable values of a specific row: top 32 movie votes, rank, title, year and theme
+
+```{r}
+movie[32,]
+```
+
+#### <br/>Display a specific row of specific variables: top 32 movie votes and rank
+
+- Using ID
+
+```{r}
+movie[32, c(1,2)]
+```
+
+- Using name
+
+```{r}
+movie[32, c("Votes","Rank")]
+```
+
+#### <br/>Display specific rows of specific variables: top 32 and 33 movie votes and rank
+
+- Using ID
+
+```{r}
+movie[c(32,33), c(1,2)]
+```
+
+- Using name
+
+```{r}
+movie[c(32,33), c("Votes","Rank")]
+```
+
+### Discover values by filtering
+
+#### <br/>Display keys (positions) of values answering a condition: all the keys of drama movies
+
+```{r}
+which(movie$Theme == "Drama")
+```
+
+#### <br/>Display specific variable values answering a condition: action movies title (the which() is optional)
+
+```{r}
+movie$Title[which(movie$Theme=="Action")]
+```
+
+The function which() allows us to not have to specify manually all the ID of action movies.
+
+#### <br/>Display keys / values of all variables answering a condition: action movies
+
+```{r}
+subset(movie, Theme == "Action")
+```
+
+#### <br/>Display keys / values of all variables answering conditions: action movie released after 2000
+
+```{r}
+subset(movie, Theme == "Action" & Year > 2000)
+```
+
+#### <br/>Same but for specific variables: comedy movie title and rank with 160.000+ votes
+
+```{r}
+subset(movie, Theme == "Comedy" & Votes > 160000, c(Title, Rank))
+```
+
+* * * * *
+## <a name="dataVisualization"></a>Visualize the data 
+* * * * *
+
+### Introduction
+
+"A picture is worth a 1000 words", you know the proverb.
+
+This part will allow you to discover your data set using visualizations! Table, pie chart, bar chart etc. To choose the right visualization, a good practice is to define firstly the goal of the visualization. Finding the right visualization can actually make you derive insight much faster, it's very important also to communicate effectively your results. Remember that if the person you made the analysis for understands roughly the method and the result, it will be more easy for him to trust and use the results.
+
+### Table
+
+#### Agregate data in a table by counting the number of variables values: number of movies by theme
+
+```{r}
+table(movie$Theme)
+```
+
+##### <br/>Add the number of empty values in the table
+
+```{r}
+table(movie$Theme, useNA = "always")
+```
+
+#### <br/>Display number of values answering or not a condition: number of movies with less than 100 000 votes
+
+```{r}
+table(movie$Votes < 100000)
+```
+
+#### <br/>Agregate data in a table by calculating variable value share: share of movies by theme
+
+```{r}
+prop.table(table(movie$Theme))
+```
+
+##### <br/>Express value share as a percentage: percentage of movies by theme
+
+```{r}
+prop.table(table(movie$Theme))*100
+```
+
+##### <br/>Round percentage to one decimal place
+
+```{r}
+round(prop.table(table(movie$Theme))*100,1)
+```
+
+#### <br/>Apply an aggregation operation (e.g.: mean) on values of a specific variable for each another variable values 
+##### Display the mean of votes by theme
+```{r}
+aggregate(Votes ~ Theme,movie, mean)
+```
+
+### Bar chart  
+
+#### Bar chart of number of movies by theme
+
+```{r}
+barplot(table(movie$Theme))
+```
+
+##### Add a legend to the bar chart
+
+```{r}
+barplot(table(movie$Theme), legend.text = "Movies")
+```
+
+##### Add a label for Y and X axis
+
+```{r}
+barplot(table(movie$Theme), legend.text = "Movies", xlab = "Theme", ylab = "Number")
+```
+
+### Histogram 
+
+#### What is the difference between a bar chart and an histogram?
+
+Columns are collapse in the histogram, it's better to visualize variable with dependant values.
+
+#### Histogram of number of movies by year
+
+```{r}
+hist(movie$Year, xlab = "Year", ylab = "Number of movies")
+```
+
+#### Add a color to the histogram
+
+```{r}
+hist(movie$Year, xlab = "Year", ylab = "Number of movies", col="grey")
+```
+
+### Pie chart of number of movies by theme
+
+```{r}
+pie(table(movie$Theme))
+```
+
+### Box plot of number of movies votes by theme
+
+```{r}
+boxplot(movie$Votes~movie$Theme, ylab="Votes", xlab="Theme")
+```
+
+### Point graph
+
+#### Votes evolution by Year
+
+```{r}
+plot(movie$Year,movie$Votes, ylab="Votes", xlab="Year")
+```
+
+#### Avoid point superposition using jitter function 
+
+Jitter function will multiply by a ramdom coefficient each point in order to see more data point.
+
+```{r}
+plot(jitter(movie$Year),jitter(movie$Votes), ylab="Votes", xlab="Year")
+```
+
+* * * * *
+## <a name="dataPreparation"></a>Prepare the data
+* * * * *
+
+### What is data preparation?
+
+Data preparation is key to clean, consolidate, prepare your data for manual or automatic analysis.
+
+You will learn how to deal with empty values, remove variable(s), remove rows(s) etc.
+
+### Rename rows
+
+The results data frame
+
+```{r}
+results
+```
+
+The function to rename rows
+
+```{r}
+rownames(results) <- c("a", "b", "c", "d", "e")
+```
+
+The results data frame with rows renamed
+
+```{r}
+results
+```
+
+### Rename variables: rename "Rank" in "Ranking" and "Theme" in "Genre"
+
+```
+library(plyr)
+rename(movie, c("Rank"="Ranking", "Theme"="Genre"))
+```
+
+### Remove a variable: remove theme
+
+```{r, results="hide"}
+drop(movie[,-5])
+```
+
+### Remove a row: remove top 250 movie
+
+```{r, results="hide"}
+drop(movie[-250,])
+```
+
+### See variable with NA values: there are 14 movies without theme
+
+```{r}
+summary(movie)
+```
+
+#### <br/>Display the 14 rows with NA values in theme variable
+
+```{r}
+movie[which(is.na(movie$Theme)),]
+```
+
+- Option 1: replace NA for "Le fabuleux destion d'Amelie Poulain" movie by "Comedy"
+
+    ```{r}
+    movie$Theme[83] <- "Comedy"
+    ```
+
+- Option 2: replace all NA theme by "Other"
+
+    ```{r}
+    movie$Theme[which(is.na(movie$Theme))] <- "Other"
+    ```
+
+- Option 3: remove all rows containing a NA value (whatever the variable is)
+
+    ```{r}
+    movie <- na.omit(movie)
+    ```
+
+### See min / max of a numeric variable: see the first and last year of the dataset
+
+```{r}
+range(movie$Year, na.rm=TRUE)
+```
+
+### Know the type of a variable 
+
+```{r}
+class(movie$Rank)
+```
+
+Different types exist: integer, character (same than string), logical etc. 
+
+A default type is applied by R depending of variable values.
+
+The type of the variable is important, some functions are usable only with specific type. 
+
+### Convert from factor to numeric type movie rank variable
+#### It works only if factor variable is "convertible" to numeric
+
+```{r}
+movie$Rank <- as.numeric(as.character(movie$Rank))
+class(movie$Rank)
+```
+
+You will be able to apply numeric function like mean(), max() or use the variable in regression model for example.
+
+### Convert from number to factor type FromUSorUK variable
+#### You might need to do the operation on a copy of the variable in order to always have the original data
+
+```{r}
+movie$FromUSorUK_copy <- as.factor(movie$FromUSorUK)
+```
+
+Factor type is used for variable storing categorical data (ordered or unordered).
+
+### Display values of FromUSorUk_copy variable
+
+```{r}
+movie$FromUSorUK_copy
+```
+
+### Replace the 0 and 1 of a binary variable by "No" and "Yes"
+#### Requirement: the variable has to be converted to a factor
+```{r}
+movie$FromUSorUK_copy <- factor(movie$FromUSorUK_copy, levels=c(0, 1), labels=c("No", "Yes"))
+```
+
+### Display the new values of FromUSorUk_copy variable
+
+```{r}
+movie$FromUSorUK_copy
+```
+
+### Values agregation: aggregage all movies in 3 categories depending of their rank
+#### Requierement: variable must be a factor
+
+#### Display the current levels of movie rank variable
+```{r}
+movie$Rank_copy <- as.factor(movie$Rank)
+levels(movie$Rank_copy)
+```
+
+#### Categorize movie with votes from 8 to 8.5 in "Good" etc. (1 and 5 are the key of the 8 and 8.5 levels)
+
+```{r}
+levels(movie$Rank_copy)[1:5] <- "Good"
+```
+
+#### Categorize also movies ranked from 8.5 to 8.8 in "Very good" and movies ranked from 8.9 to 9.2 in "Excellent"
+
+```{r}
+levels(movie$Rank_copy)[2:5] <- "Very good"
+levels(movie$Rank_copy)[3:5] <- "Exellent"
+```
+
+#### Display the new levels of movie rank variable
+```{r}
+levels(movie$Rank_copy)
+```
+
+* * * * *
+## <a name="stats"></a>Analyze and understand the data thanks to statistics
+* * * * *
+
+### Introduction
+
+This part will help you to analyze and understand the data of your dataset.
+
+### Vocabulary
+
+If you have taken the red pill, you are now in the statistics world... And like others disciplines, you have to learn new words!
+
+#### What is the hazard?
+
+The hazard is the traduction of our ignorance (so it can be relative).
+
+This is something that we can't predict (exemple: heads or tails game).
+
+#### What is a probability?
+
+A probability is the frequency of apparition of an event (example: 1/6 for the face 6 of a game dice)
+
+#### What is a variable law?
+
+The law of a variable is the list of the probality that each variable value appears.
+
+Example: 
+
+- Game dice: 1/6 for each variable value (1,2,3,4,5,6)
+- Heads or tails game: 1/2 for each variable value (heads or tails)
+
+When each variable value is resulting also from several others random variables then the variable follows a normal / Gaussian distribution.
+
+Example:
+
+- The length / weight of a person
+- Result of a game dice
+- Result of a heads or tails game
+
+You can know if the variable is nearly following a normal / Gaussian distribution by visualizing it using an histogram.
+
+If the histogram is bell-shaped / follows a Gauss curve then the variable is following a normal distribution:
+
+![Variable following a bell-shaped a Gauss curve](http://www.mobile-marketing.fr/r-guide/220px-Gauss_reduite.svg.png)
+
+Statistiscians have developed a lot of methods requiring that the variable follows a normal distribution.
+
+### <a name="analysisReliability"></a>How to determine if the analysis realized on a sample data set is reliable on the exhaustive data set?
+
+By using Confidence Interval (CI): CI is a type of interval estimate.
+
+#### How to measure a Confidence Interval?
+
+- First interval
+
+    ```
+    mean(variable) - (1.96 * sd(variable))
+    ```
+
+- Second interval
+
+    ```
+    mean(variable) + (1.96 * sd(variable))
+    ```
+
+#### How to interpret a Confidence Interval?
+
+There is 95% of chance that the variable be comprised into the confidence interval in the exhaustive data set.
+
+- Example
+
+In the sample data set, you have 30% of smokers that have developed a poumon cancert. If the CI is for example [50% ; 64%], that means that there is 95% of chance that the percent of smokers who developed a poumon cancert will be comprised between 50% and 64% in the exhaustive data set. If the CI is too big to learn something (e.g: if it's [4% ; 64%]), it's because the sample data set is not big enough.
+
+#### Requirements
+
+- The variables have to follow a normal distribution
+- The sample data set has to contain ramdom variable (example: not a top 250 movie data set like ours)
+- The sample data set has to contain an important number of rows (greater the number of rows is, smaller the interval will be)
+
+### How to determine if two variables are correlated?
+
+#### What is variable correlation?
+
+Two variables are correlated when the knowing of one variable value gives us an indication on the other variable value.
+
+The calculation formula of the correlation coefficient depends of the variable type. 
+
+The result is not intuitive (you can't explain it easily). 
+
+It's usefull to compare correlation of several variables (e.g.: correlation of variable A & B is greater than A & C one). 
+
+To concretize the vision of the correlation, the best thing to do is a graph.
+
+#### How to interpret the result?
+
+Result is called "R" (R, again!):
+
+- 1 < R < 1
+- More R is closed to -1 or 1, more the variables are correlated
+    - If R is closed to 1, more the variable Y is increasing, more the variable X is increasing too
+    - If R is closed to -1, more the variable Y is increasing, more the variable X is decreasing 
+    - If R is equaled to -1 or 1, the variables are mutually determined (you can find one variable value thanks to the other)
+    - If R is equaled to 0, the variable are not dependant
+- Here is the linear relation that linked the two variables: Y = a X + b
+
+#### If the variables are numbers
+
+- Option 1: use Pearson correlation coefficient 
+    
+    - Example A: correlation between movie Rank / Votes   
+        
+        ```{r}
+        cor.test(movie$Votes,movie$Rank)
+        ```
+        
+        Pearson correlation coefficient is 0.59.
+      
+    - Representation    
+          
+        ```{r}
+        plot(jitter(movie$Votes),jitter(movie$Rank), xlab="Votes", ylab="Rank")
+        ```
+          
+    - Example B: correlation between Rank / Year
+        
+        ```{r}
+        cor.test(movie$Year,movie$Rank)
+        ```
+        
+        Pearson correlation coefficient is -0.02.
+        
+    - Representation    
+        
+        ```{r}
+        plot(jitter(movie$Year),jitter(movie$Rank), xlab="Year", ylab="Rank")
+        ```
+        
+        Note: you have also the Confidence Interval of the correlation coefficients in the output.
+
+    - Visualization of the two graphs together
+    
+        - Utilization of the function par() that allows to split the output window in one / two / ... parts
+    
+            ```{r}
+            par(mfrow = c(1,2))
+            ```
+    
+        - Adding of the two visualizations
+          
+            ```{r}
+            plot(jitter(movie$Votes),jitter(movie$Rank), xlab="Votes", ylab="Rank")
+            ```
+              
+            ```{r}
+            plot(jitter(movie$Year),jitter(movie$Rank), xlab="Year", ylab="Rank")
+            ```
+          
+        We see that the points of the graph Rank / Votes are more concentrated than the ones of the graph Rank / Year. That means that variables Rank / Votes (correlation coefficient: 0.60) are more correlated than variables Rank / Year (correlation coefficient: -0.02).
+        
+        - Requirement
+    
+            - At least one of the variable has to follow a normal distribution<br/><br/>
+            
+- Option 2: use Spearman correlation coefficient (if the variables don't meet the requierement)
+
+    - Example
+    
+        ```{r}
+        cor.test(movie$Votes,movie$Rank, method="spearman")
+        ```
+        
+        Spearman correlation coefficient is 0.44 (compared to 0.60 for Pearson correlation coefficient).
+
+    - Warning
+    
+        - The number of ex-aequos variable values has to be low (it influences negatively the result)<br/><br/>
+
+#### If the variables are binaries
+
+```
+library(Epi)
+twoby2(1-VAR1,1-VAR2)
+```
+
+VAR1 and VAR2 have to be replaced by your variables (we don't have two binary variables in the top 250 movie dataset).
+
+twoby2 function (requires the Epi package) will return two results: the Odds Ratio (OR) and the Relative Risk (RR).
+
+Use the Odds Ratio (OR) if the data set is small (several hundreds of rows) and the Relative Risk (RR) if the data set is big.
+
+This is the Odds Ratio that is used in regression model (we will see after what this is).
+
+#### Warning
+
+- Correlation is different than causality: if two variables A & B are correlated, if A is true, B is not mandatory true
+- Correlation doesn't explain everything: it can be null even if the variables are correlated (e.g.: two variables that follow a U-shaped curve)
+
+### How to determine if several variables are correlated?
+
+By using a correlation matrix.
+
+- Requierement
+
+The variable of the matrix have to be numbers or binaries.
+
+#### How to visualize a correlation matrix?
+
+- Method 1: by using a table
+
+    ```{r}
+    round(cor(movie[,c("Votes","Rank")],use="complete.obs"), digits=3)
+    ```
+    
+    The correlation between votes and rank variables is 0.59 (the Pearson correlation coefficient is used).
+
+- Method 2: by using others libraries (e.g.: corrplot)
+
+    ```{r}
+    library(corrplot)
+    corrplot(cor(movie[,c("Votes","Rank")],use="complete.obs"), method="circle")
+    ```
+    
+    This is a 2 dimensions visual representation of the Pearson correlation coefficient:
+    
+    - More the circle is big, more the correlation coefficient is important
+    - More the circle is :
+        - Red, more the correlation coefficient is close to -1
+        - Blue, more the correlation coefficient is close to 1
+        - White, more the correlation coefficient is close to 0<br/><br/>
+
+- Method 3: by doing a Principal Component Analysis (PCA)
+
+    - Requirement<br/><br/>
+
+    The number of variables has to be fewer than 15 (approximatively).
+
+    - Method 3.1: 2 dimensions chart<br/><br/>
+
+    ```{r}
+    library(psy)
+    mdspca(movie[,c("Votes","Rank")])
+    ```
+    
+    Only the variables that are near the edge of the circle can be analyzed.
+    
+    If 2 variables are near the edge of the circle:
+    
+    - The closer they are to each other, the more they are positively correlated (R nearly equals 1)
+    - If they are at 90 degrees relative to the center of the circle, they are not correlated (R nearly equals 0)
+    - If they are at 180 degrees relative to the center of the circle, they are correlated negatively (R nearly equals -1)<br/><br/>
+
+- Method 3.2: 3 dimensions chart (spheric PCA)<br/><br/>
+
+    ```
+    sphpca(movie[,c("Votes","Year")])
+    ```
+    
+    This visualization can be analyzed like the 2 dimensions chart.
+
+    - Method 3.3: focus PCA<br/><br/>
+
+    ```{r}
+    library("psy")
+    fpca(data=movie,y="Rank",x=c("Votes","Year"),partial="No")
+    ```
+    
+    This visualization allows you to make a focus on one variable and visualize the correlation of this variable with several others variables.
+    
+    The red circle is the limit of significance (all the variables that are in the red circle are statistically significants).
+    
+    Each other circles represent a value of R from R = 0 at the edge to R = 1 in the center.
+
+- Method 4: by using a cluster analysis method
+
+    - What is a cluster analysis method?<br/><br/>
+    
+    One of the goal of cluster analysis method is to find automatically group of variables that are correlated.
+
+    - Requirement<br/><br/>
+
+    None (the number of variable can be greater than 15).
+
+    - Method 4.1: use tree classification visualization method<br/><br/>
+
+    ```{r}
+    cah <- hclust(dist(t(scale(movie[,c("Votes","Year","FromUSorUK", "Rank")]))), method="ward.D2")
+    plot(cah,xlab="",ylab="",main="Tree classification")
+    ```
+
+    This visualization allows you to know quickly the correlation between group of variables.
+
+    - Method 4.2: use heatmap visualization method<br/><br/>
+
+    ```{r}
+    obj <- cor(movie[,c("Votes","Year","FromUSorUK")], use="pairwise.complete.obs")
+    heatmap(obj,col=gray(seq(1,0,length=16)))
+    ```
+    
+    This visualization gathers tree classification and heatmap.
+    
+    Correlations are symbolized:
+    
+    - Using color (from black for high correlation to white for low correlation)
+    - Using proximity (variables that are near eachother have a high correlation and vice versa) 
+
+### How to verify the reliability of a correlation?
+
+#### What is the reliability of a correlation?
+
+A correlation is reliable when the hazard can't only explain the correlation.
+
+#### Example
+
+If we take the same sample data set in which you have 30% of smokers that have developed a poumon cancer. If you want to be sure that the hazard can't only explain the correlation between the two variables, you will have to verify the reliability of the correlation.
+
+#### How can I interpret the result of a reliability test?
+
+The result of the reliability test is called "p".
+
+There are 2 methods to interpret "p":
+
+- Method 1: Neaman & Pearson (N&P) method
+
+    - If p < 5%: the test is reliable / statistically significant
+    - If p > 5%: the test is NOT reliable / statistically significant<br/><br/>  
+    
+- Method 2: Fisher method
+
+    The Fisher method analyzes "p" by interval:
+
+    - If p < 2%: very reliable
+    - If p < 5%: reliable
+    - If p < 7%: reliability limit
+    - If p < 10%: you can say that there is a trend
+    - If p < 20%: not reliable
+    
+Neaman & Pearson (N&P) method is preferred when there is an action / decision to take based on the reliability test result.
+    
+Like for the calculation formula of the correlation coefficient, the calculation formula of the reliability test depends of the variable type. 
+
+Note: you have sometimes directly the p value that is given (e.g.: Pearson and Spearman correlation coefficients, focus PCA visualization etc.)
+
+#### How to calculate "p"?
+
+- If the variables are percentages
+
+    - Option 1: use Chi-2 test
+
+        ```
+        chisq.test(VAR1,VAR2,correct=false)
+        ```
+        
+        VAR1 and VAR2 have to be replaced by your variables (we don't have two percentages variables in the top 250 movie dataset).
+
+        - Requirements  
+        
+            - The data set must be important (more than 30 rows approximatively)
+            - The percentages must not be too close from 0 or 100<br/><br/>
+        
+            Requierements are approximative but R will tell you automatically if the conditions are not OK. 
+        
+        In the case it's not OK, you will have to use Fisher test.
+
+    - Option 2: use Fisher test
+
+        ```
+        fisher.test(VAR1,VAR2,correct=false)
+        ```
+        
+        - Requirements<br/><br/>
+        
+        None.
+
+- If the variables are means
+
+    - Option 1: use Student T test
+
+        ```
+        t.test(VAR1,VAR2)
+        ```
+        
+        VAR1 and VAR2 have to be replaced by your variables (we don't have two means variables in the top 250 movie dataset).
+
+        - Requirements
+        
+            - The number of rows by group must be greater than 30
+            - The variables have to follow a normal distribution
+            - The standard derivation of the variables must be equals<br/><br/>
+    
+    - Option 2: use Wilcoxson test
+    
+        ```
+        t.test(VAR1,VAR2,wilcoxon)
+        ```
+        
+        - Requirements<br/><br/>
+            
+        None.
+        
+### How to measure the correlation of one or several variables with another variable?
+
+This part is about linear and logistic regression models.
+
+The "another variable" will be called the variable to explain.
+The "one or several variables" will be called the explicative variable(s).
+
+#### What is a linear regression line?
+
+The linear regression line is the line that does its best to go through all the points of the graph.
+
+Example: evolution of number of votes depending of the year with the linear regression line ("lm" function for Linear Model)
+
+```{r}
+plot(movie$Year,movie$Votes)
+abline(lm(movie$Votes~movie$Year))
+```
+
+The linear regression line equation is: 
+
+```
+Votes = a + B*Year
+```
+
+It follows the standard equation: Y = a + B*x.
+
+In order to know B value, we have to transform the linear regression line in a linear regression model.
+
+##### How to calculate a linear regression model and B value?
+
+```{r}
+summary(lm(movie$Votes~movie$Year))
+```
+
+##### Where is a, B and p value there?
+
+- A is the number at the intersection between "Estimate" column and "(Intercept)" line: -12369489
+- B is the number at the intersection between "Estimate" column and "Year" line: 6436
+- p is the number at the intersection between "Pr(>|t|)" column and "Year" line: 1.99e-15
+
+B value is statistically significant because p < 5% (using Neaman & Pearson (N&P) method).
+
+#### How to interprate the B value?
+
+At each new year, the number of votes increases of 6436.
+
+The linear regression model is complementary to the Pearson / Spearman correlation coefficient.
+
+Indeed, linear regression model gives the multiplier whereas Pearson / Spearman method gives the correlation coefficient.  
+
+#### Requirements
+
+- The variable to explain has to be a number or a binary
+- The explicative variable(s) has to be number(s)
+
+#### If the variable to explain is a number
+
+- Use simple linear regression model if you want to measure the correlation of one variable on another one
+
+    See example above to measure the correlation of variable year on variable vote.
+  
+- Use multiple linear regression model if you want to measure the correlation of several variables on another one
+
+    If I want to measure the correlation of variables rank and year (explicative variables) on variable vote (variable to explain)
+
+    ```{r}
+    rg <- lm(Votes~Year+Rank, movie)
+    summary(rg)
+    ```
+
+#### If the variable to explain is binary
+
+- Use simple logistic regression model: if you want to measure the correlation of one variable on another one
+    
+    If I want to measure the correlation between FromUSorUK (variable to explain) and Year (explicative variable)
+
+    ```{r}
+    summary(glm(movie$FromUSorUK~movie$Year))
+    ```
+
+- Use multiple logistic regression model: if you want to measure the correlation of several variables on another one
+
+    If I want to measure the correlation between FromUSoUK (variable to explain) and Rank and Year (explicative variables)
+
+    ```{r}
+    summary(glm(movie$FromUSorUK~movie$Year+movie$Rank))
+    ```
+
+#### How to interprate the B value?
+
+In this simple / multiple logistic regression model, p is too important (minimum: 30%) to learn something.
+
+### How to predict a result thanks to linear / logistic regression model?
+
+#### What would be the number of votes of a movie released in 2010 with a 8.0 rank?
+
+```{r}
+predict(rg, data.frame(Year=2010, Rank=8.0))
+```
+
+rg is the variable that stores the multiple linear regression model calculated above.
+
+Thanks to the data of the data set and the linear regression model, a movie released in 2010 with 8.0 rank should have 360.984 votes.
