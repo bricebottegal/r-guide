@@ -35,7 +35,9 @@ By <a href="https://twitter.com/bricebottegal">Brice Bottégal</a>
 
 ### About this guide
 
-The goal of this guide is to help you to bootstrap your knowledge in statistics and R programming language whatever your current level is. It has been created thanks to a French MOOC called <a href="https://www.fun-mooc.fr/">"Introduction to statistics using R"</a> created by Professor Bruno Fallisard from Paris-Sud university and Christophe Lalanne from Paris-Diderot university. It has been developed using RMarkdown and source code is available on <a href="https://github.com/bricebottegal/r-guide">GitHub</a> so please don't hesitate to enhance it! The [dataset](#dataset) is the top 250 movies ranked on <a href="http://www.imdb.com/">IMDb site</a>, you have to <a href="http://www.mobile-marketing.fr/r-guide/movie.csv">download it</a> to follow this guide. 
+The goal of this guide is to help you to bootstrap your knowledge in statistics and R programming language whatever your current level is. It has been created thanks to a French MOOC called <a href="https://www.fun-mooc.fr/">"Introduction to statistics using R"</a> created by Professor Bruno Fallisard from Paris-Sud university and Christophe Lalanne from Paris-Diderot university. It has been developed using RMarkdown and source code is available on <a href="https://github.com/bricebottegal/r-guide">GitHub</a> so please don't hesitate to enhance it! The [dataset](#dataset) is the top 250 movies ranked on <a href="http://www.imdb.com/">IMDb site</a>, you have to <a href="http://www.mobile-marketing.fr/r-guide/movie.csv">download it</a> to follow this guide.
+
+This guide was republished on <a href="http://www.r-bloggers.com">r-bloggers</a> with permission (by the way, r-bloggers is a good blog to follow!).
 
 Happy analysis!
 
